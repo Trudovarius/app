@@ -45,12 +45,12 @@
 
 <style scoped>
   #header {
-    height: 56px;
+    height: 100px;
     display: flex;
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #521751;
+    background-color: #35DF2D;
     padding: 0 20px;
   }
 
@@ -62,6 +62,14 @@
   .logo a {
     text-decoration: none;
     color: white;
+    display: block;
+    padding: 10px;
+    border-radius: 50px;
+  }
+
+  .logo a:active, .logo a:hover {
+    color: white;
+    background-color: #1A8038;
   }
 
   nav {
@@ -85,12 +93,17 @@
   li a {
     text-decoration: none;
     color: white;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    border-radius: 50px;
   }
 
   li a:hover,
   li a:active,
   li a.router-link-active {
-    color: #fa923f;
+    color: white;
+    background-color: #1A8038;
   }
 
   .logout {
@@ -99,5 +112,18 @@
     font: inherit;
     color: white;
     cursor: pointer;
+    font-weight: bold;
+  }
+
+  .logout a {
+    display: block;
+    padding: 10px;
+    border-radius: 50px;
+  }
+
+  .logout a:hover,
+  .logout a:active, {
+    color: white;
+    background-color: #1A8038;
   }
 </style>

@@ -47,7 +47,8 @@ export default new Vuex.Store({
           localStorage.setItem('expirationDate', expirationDate);
           dispatch('storeUser', authData);
           dispatch('setLogoutTimer',res.data.expiresIn);
-          router.push('/');
+          if (router.currentRoute.path !== '/')
+            router.push('/');
         })
         .catch(error => console.log(error));
     },

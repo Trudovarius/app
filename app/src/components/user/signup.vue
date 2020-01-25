@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="signup">
     <h1>Sign up</h1>
     <form @submit.prevent="onSubmit">
       <div class="input">
@@ -40,11 +40,6 @@
     },
     methods: {
       onSubmit () {
-        // const formData = {
-        //   name: this.name,
-        //   email: this.email,
-        //   password: this.password,
-        // };
         this.$store.dispatch('signup', {
           name: this.name,
           email: this.email,
@@ -57,4 +52,11 @@
 
 
 <style>
+.signup {
+  background-color: white;
+  border-radius: 25px;
+  width: 100%;
+  padding: 25px;
+  float: right;
+}
 </style>
