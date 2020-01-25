@@ -32,6 +32,7 @@ export default new Vuex.Store({
     },
     signup({commit, dispatch}, authData) {
       axios.post('signup', {
+        name: authData.name,
         email: authData.email,
         password: authData.password
       })
@@ -42,11 +43,11 @@ export default new Vuex.Store({
           });
           const now = new Date();
           const expirationDate = new Date(now.getTime() + res.data.expiresIn*1000);
-          localStorage.setItem('token', res.data.idToken);
-          localStorage.setItem('userId', res.data.localId);
+          localStorage.setItem('userId', res.data.user._id);
           localStorage.setItem('expirationDate', expirationDate);
           dispatch('storeUser', authData);
           dispatch('setLogoutTimer',res.data.expiresIn);
+          router.push('/');
         })
         .catch(error => console.log(error));
     },

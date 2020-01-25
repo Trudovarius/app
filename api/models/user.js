@@ -3,12 +3,15 @@ var bcrypt = require('bcrypt');
 
 var userSchema = mongoose.Schema({
   email       : String,
-  // name        : String,
-  password         : String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+  name        : String,
+  password    : String,
+  level       : Number,
+  experience  : Number,
+  image       : String,
+  createdAt   : {
+      type: Date,
+      default: Date.now
+    }
 });
 
 userSchema.methods.generateHash = (password) => {

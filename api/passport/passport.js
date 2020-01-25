@@ -70,13 +70,11 @@ module.exports = function(passport) {
     (req, email, password, done) => {
       if (email)
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
-      console.log(req.session.captcha,req.body.captcha);
 
       // asynchronous
       process.nextTick(() => {
         // if the user is not already logged in:
         if (!req.user) {
-          console.log(email,password);
 
           User.findOne({ 'email' :  email }, (err, user) => {
             // if there are any errors, return the error
@@ -87,12 +85,15 @@ module.exports = function(passport) {
             if (user) {
               return done(null, false, 'That email is already taken.');
             } else {
-              console.log("register");
               // create the user
               var newUser = new User();
 
-              newUser.email    = email;
-              newUser.password = newUser.generateHash(password);
+              newUser.name       = req.body.name;
+              newUser.email      = email;
+              newUser.level      = 1;
+              newUser.experience = 0;
+              newUser.image      = "./src/assets/profile/default.png";
+              newUser.password   = newUser.generateHash(password);
 
               newUser.save((err) => {
                 if (err)
