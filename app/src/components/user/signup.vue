@@ -1,5 +1,5 @@
 <template>
-  <div class="signup">
+  <div class="signup shadow">
     <h1>Sign up</h1>
     <form @submit.prevent="onSubmit">
       <div class="input">
@@ -34,6 +34,7 @@
   export default {
     data () {
       return {
+        name: '',
         email: '',
         password: ''
       }
@@ -52,11 +53,4 @@
 
 
 <style>
-.signup {
-  background-color: white;
-  border-radius: 25px;
-  width: 100%;
-  padding: 25px;
-  float: right;
-}
 </style>

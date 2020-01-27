@@ -1,17 +1,15 @@
 <template>
   <article>
-    <div class="home row">
+    <div class="home row shadow">
       <h1>HOME</h1>
     </div>
     <div class="row">
-      <app-signin  v-if="!auth" class="col-1-of-2"/>
-      <app-signup  v-if="!auth" class="col-1-of-2"/>
+      <app-signup  v-if="!auth"/>
     </div>
   </article>
 </template>
 
 <script>
-  import Signin from "./user/signin.vue";
   import Signup from "./user/signup.vue";
 
   export default {
@@ -26,18 +24,10 @@
       }
     },
     components: {
-      'app-signin': Signin,
-      'app-signup': Signup,
+      'app-signup': Signup
     },
   }
 </script>
 
 <style lang="scss">
-.home {
-  min-height: 200px;
-  background-color: white;
-  border-radius: 25px;
-  width: 100%;
-  padding: 25px;
-}
 </style>

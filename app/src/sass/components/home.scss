@@ -1,0 +1,62 @@
+.shadow {
+  -webkit-box-shadow: 5px 15px 21px 2px rgba(179,179,179,1);
+  -moz-box-shadow: 5px 15px 21px 2px rgba(179,179,179,1);
+  box-shadow: 5px 15px 21px 2px rgba(179,179,179,1);
+}
+
+.home {
+  min-height: 200px;
+  background-color: white;
+  border-radius: 25px;
+  width: 100%;
+  padding: 25px;
+}
+
+.signup, .signin {
+  background-color: white;
+  border-radius: 25px;
+  width: 100%;
+  padding: 25px;
+  border: 3px solid #1A8038;
+  min-height: 300px;
+}
+
+.signup h1, .signin h1 {
+  margin-bottom: 25px;
+}
+
+.signup .input, .signin .input {
+  padding: 5px;
+  margin: auto;
+  width: 300px;
+}
+
+.signup input, .signin input {
+  background-color: #F4F9F4;
+  border-radius: 50px;
+  width: 200px;
+  padding: 3px;
+  float: right;
+}
+
+.signup label, .signin label {
+}
+
+.signup .submit, .signin .submit {
+  padding: 5px;
+  width: 100%;
+  margin: auto;
+}
+
+.signup button, .signin button {
+  background-color: #F4F9F4;
+  border-radius: 50px;
+  width: 20%;
+  margin: auto;
+  margin-top: 25px;
+  padding: 2px;
+}
+
+.signup button:hover, .signin button:hover {
+  background-color: #E4E9E4;
+}

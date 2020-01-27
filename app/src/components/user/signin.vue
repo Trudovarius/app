@@ -1,5 +1,5 @@
 <template>
-  <div class="signin">
+  <div class="signin shadow">
     <h1>Sign in</h1>
     <form @submit.prevent="onSubmit">
         <div class="input">
@@ -45,11 +45,4 @@
 
 
 <style>
-.signin {
-  background-color: white;
-  border-radius: 25px;
-  width: 100%;
-  padding: 25px;
-  float: left;
-}
 </style>
