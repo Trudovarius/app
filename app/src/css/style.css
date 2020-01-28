@@ -131,18 +131,17 @@ li a.router-link-active {
   -moz-box-shadow: 5px 15px 21px 2px #b3b3b3;
   box-shadow: 5px 15px 21px 2px #b3b3b3; }
 
-.home {
-  min-height: 200px;
+.block {
   background-color: white;
   border-radius: 25px;
-  width: 100%;
   padding: 25px; }
 
+.home {
+  min-height: 200px;
+  width: 100%; }
+
 .signup, .signin {
-  background-color: white;
-  border-radius: 25px;
   width: 100%;
-  padding: 25px;
   border: 3px solid #1A8038;
   min-height: 300px; }
 
@@ -176,3 +175,6 @@ li a.router-link-active {
 
 .signup button:hover, .signin button:hover {
   background-color: #E4E9E4; }
+
+.profile img {
+  border-radius: 500px; }

@@ -6,6 +6,7 @@ import store from './store';
 import Home from './components/home.vue'
 import SignupPage from './components/user/signup.vue'
 import SigninPage from './components/user/signin.vue'
+import Profile from './components/user/profile.vue'
 
 Vue.use(VueRouter);
 
@@ -13,6 +14,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/signup', component: SignupPage },
   { path: '/signin', component: SigninPage },
+  { path: '/profile', component: Profile }
 ];
 
 export default new VueRouter({mode: 'history', routes})

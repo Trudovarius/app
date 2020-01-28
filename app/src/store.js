@@ -43,7 +43,6 @@ export default new Vuex.Store({
           });
           const now = new Date();
           const expirationDate = new Date(now.getTime() + res.data.expiresIn*1000);
-          localStorage.setItem('userId', res.data.user._id);
           localStorage.setItem('expirationDate', expirationDate);
           dispatch('storeUser', authData);
           dispatch('setLogoutTimer',res.data.expiresIn);
@@ -60,7 +59,14 @@ export default new Vuex.Store({
         .then(res => {
           const now = new Date();
           const expirationDate = new Date(now.getTime() + 3600*1000);
-          localStorage.setItem('userId', res.data.user._id);
+          let user = {
+            name: res.data.user.name,
+            email: res.data.user.email,
+            level: res.data.user.level,
+            experience: res.data.user.experience,
+            img: res.data.user.image
+          };
+          localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('expirationDate', expirationDate);
           commit('authUser', {
             userId: res.data.user._id,
@@ -90,7 +96,7 @@ export default new Vuex.Store({
     logout({commit}) {
       commit('clearAuthData');
       localStorage.removeItem('expirationDate');
-      localStorage.removeItem('userId');
+      localStorage.removeItem('user');
       router.replace('/signin');
     },
     storeUser ({commit, state}, userData) {
@@ -126,6 +132,9 @@ export default new Vuex.Store({
     },
     isAuthenticated(state) {
       return state.userId !== null;
+    },
+    user(state) {
+      return JSON.parse(localStorage.getItem('user'));
     }
   },
   modules: {

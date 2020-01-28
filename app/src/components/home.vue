@@ -1,6 +1,6 @@
 <template>
   <article>
-    <div class="home row shadow">
+    <div class="home row shadow block">
       <h1>HOME</h1>
     </div>
     <div class="row">

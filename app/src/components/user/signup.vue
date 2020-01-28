@@ -1,5 +1,5 @@
 <template>
-  <div class="signup shadow">
+  <div class="signup shadow block">
     <h1>Sign up</h1>
     <form @submit.prevent="onSubmit">
       <div class="input">
