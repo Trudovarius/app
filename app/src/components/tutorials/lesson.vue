@@ -1,7 +1,11 @@
 <template>
-  <div class="dashboard row block shadow">
-    <h1>PIXI JS</h1>
-      <li><router-link to="/lesson/123">pixi js</router-link></li>
+  <div class="lesson">
+    <div class="canvas">
+      <canvas></canvas>
+    </div>
+    <div class="code">
+    </div>
+
   </div>
 </template>
 

@@ -3,9 +3,7 @@
     <div class="home row shadow block">
       <h1>HOME</h1>
     </div>
-    <div class="row">
-      <app-signup  v-if="!auth"/>
-    </div>
+    <app-signup  v-if="!auth"/>
   </article>
 </template>
 

@@ -22,6 +22,11 @@
   .row .col-2-of-4 {
     width: calc(2* ((100% - 3 * 2rem) / 4) + 2rem); }
 
+.lesson {
+  width: 100vw;
+  height: 90vh;
+  background-color: black; }
+
 * {
   margin: 0;
   padding: 0;
@@ -36,10 +41,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50; }
-
-.container {
-  width: 80%;
-  margin: 50px auto; }
 
 h1, h2 {
   font-weight: normal; }
@@ -56,7 +57,7 @@ a {
   color: #42b983; }
 
 #header {
-  height: 100px;
+  height: 10vh;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
@@ -134,7 +135,8 @@ li a.router-link-active {
 .block {
   background-color: white;
   border-radius: 25px;
-  padding: 25px; }
+  padding: 25px;
+  margin-top: 50px; }
 
 .home {
   min-height: 200px;

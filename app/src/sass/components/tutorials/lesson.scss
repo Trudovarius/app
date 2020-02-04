@@ -1,0 +1,23 @@
+.lesson {
+  width: 100vw;
+  height: 90vh;
+  background-color: black;
+
+  .canvas {
+    width: 50vw;
+    height: 70vh;
+    background-color: red;
+  }
+
+  .code {
+    width: 50vw;
+    height: 70vh;
+    background-color: blue;
+  }
+
+  canvas {
+    width: 30vw;
+    height: 50vh;
+    background-color: blue;
+  }
+}
