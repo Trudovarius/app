@@ -1,0 +1,70 @@
+.pixi {
+
+  h2 {
+    margin: 1rem;
+  }
+
+  .text {
+    padding: 3rem;
+    text-align: justify;
+    font-size: 1.1rem;
+    border-left: 1px solid $color-grey-light-2;
+
+    p {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+
+      a {
+        display: block;
+        text-decoration: none;
+      }
+
+      a:hover, a:active {
+        color: $color-primary-dark;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  ul {
+    width: 95%;
+    display: block;
+
+    li {
+      display: block;
+      width: 100%;
+      background-color: $color-grey-light-1;
+
+      &:nth-child(2n-1) {
+        background-color: $color-grey-light-2;
+      }
+
+      &:first-child, &:first-child a:hover, &:first-child a:active {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+
+      &:last-child, &:last-child a:hover, &:last-child a:active {
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+
+      a {
+        display: block;
+        width: 100%;
+        background-color: inherit;
+        color: black;
+        font-weight: normal;
+      }
+
+      a:hover, a:active  {
+        display: block;
+        width: 100%;
+        border-radius: 0px;
+        background-color: $color-grey-dark;
+        color: white;
+        font-weight: normal;
+      }
+    }
+  }
+}
