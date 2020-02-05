@@ -2,22 +2,56 @@
   width: 100vw;
   height: 90vh;
   background-color: black;
+  overflow: hidden;
+
+  .task {
+    height: 20vh;
+    width: 100vw;
+    background-color: green;
+  }
 
   .canvas {
     width: 50vw;
-    height: 70vh;
+    height: 50vh;
     background-color: red;
+    float:left;
   }
 
   .code {
     width: 50vw;
-    height: 70vh;
+    height: 50vh;
     background-color: blue;
+    float:right;
   }
 
   canvas {
     width: 30vw;
     height: 50vh;
     background-color: blue;
+  }
+
+  .console {
+    height: 20vh;
+    width: 100vw;
+    background-color: magenta;
+    float:left;
+    overflow-y:scroll;
+    overflow-x:hidden;
+
+    .line {
+      color: black;
+      display: block;
+      width: 100vw;
+      text-align: left;
+      border-bottom: 1px solid $color-grey-light-2;
+      padding: 3px;
+
+      &::before {
+        content: ">";
+        color: $color-grey-light-2;
+        margin-left: 1rem;
+        margin-right: 1.5rem;
+      }
+    }
   }
 }
