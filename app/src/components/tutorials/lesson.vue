@@ -3,7 +3,7 @@
     <div class="task">
     </div>
     <div class="canvas">
-      <iframe id="canvas" src="../src/canvas.html" sandbox="allow-scripts"></iframe>
+      <iframe id="canvas" src="../src/canvas.html" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
     <div class="code">
       <form v-on:submit.prevent="onSubmit">
@@ -33,8 +33,10 @@
     },
     methods: {
       onSubmit() {
-        // console.log(this.code);
-        eval(this.code);
+        // sending code from textarea to window with canvas
+        var iframe = $('#canvas')[0].contentWindow;
+        iframe.postMessage(this.code, location.origin);
+        return false;
       }
     },
     mounted(){

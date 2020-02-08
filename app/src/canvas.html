@@ -20,11 +20,21 @@
 
   PIXI.utils.sayHello(type);
 
-  let app = new PIXI.Application({ resizeTo: window });
+  var app = new PIXI.Application({ resizeTo: window });
+
+  var stage = app.stage;
 
   document.body.appendChild(app.view);
 
-  let txt = new PIXI.Text("kokoooos", {font: "Comic Sans", size: 80, color: 'white'});
 
-  app.stage.addChild(txt);
+  function executeCode (e) {
+    eval(e.data);
+  }
+
+  if (window.addEventListener) {
+    window.addEventListener("message", executeCode, false);
+  }
+  else {
+    window.attachEvent("onmessage", executeCode);
+  }
 </script>
