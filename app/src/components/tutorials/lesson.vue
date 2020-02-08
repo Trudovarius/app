@@ -3,9 +3,13 @@
     <div class="task">
     </div>
     <div class="canvas">
-      <canvas></canvas>
+      <iframe id="canvas" src="../src/canvas.html" sandbox="allow-scripts"></iframe>
     </div>
     <div class="code">
+      <form v-on:submit.prevent="onSubmit">
+        <textarea placeholder="Type your code here:" v-model="code"></textarea>
+        <button>Execute!</button>
+      </form>
     </div>
     <div class="console">
     </div>
@@ -16,6 +20,7 @@
   export default {
     data () {
       return {
+        code: ''
       }
     },
     computed: {
@@ -27,6 +32,10 @@
       }
     },
     methods: {
+      onSubmit() {
+        // console.log(this.code);
+        eval(this.code);
+      }
     },
     mounted(){
       if (!this.auth) {
@@ -44,8 +53,6 @@
             console.log("JavaScript error: " + message + " on line " +
                     linenumber + " for " + url);
         }
-
-        console.log('XDDD')
       }
     }
   }

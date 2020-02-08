@@ -25,33 +25,39 @@
 .lesson {
   width: 100vw;
   height: 90vh;
-  background-color: black;
   overflow: hidden; }
   .lesson .task {
     height: 20vh;
     width: 100vw;
-    background-color: green; }
+    border-bottom: 1px solid #000; }
   .lesson .canvas {
     width: 50vw;
     height: 50vh;
-    background-color: red;
     float: left; }
+    .lesson .canvas #canvas {
+      width: 30vw;
+      height: 50vh;
+      background-color: blue; }
   .lesson .code {
     width: 50vw;
     height: 50vh;
-    background-color: blue;
     float: right; }
-  .lesson canvas {
-    width: 30vw;
-    height: 50vh;
-    background-color: blue; }
+    .lesson .code form {
+      width: 100%;
+      height: 100%; }
+      .lesson .code form textarea {
+        width: 100%;
+        height: 90%;
+        resize: none;
+        overflow-y: scroll;
+        overflow-x: hidden; }
   .lesson .console {
     height: 20vh;
     width: 100vw;
-    background-color: magenta;
     float: left;
     overflow-y: scroll;
-    overflow-x: hidden; }
+    overflow-x: hidden;
+    border-top: 1px solid #000; }
     .lesson .console .line {
       color: black;
       display: block;
@@ -61,7 +67,7 @@
       padding: 3px; }
       .lesson .console .line::before {
         content: ">";
-        color: #eee;
+        color: #666;
         margin-left: 1rem;
         margin-right: 1.5rem; }
 

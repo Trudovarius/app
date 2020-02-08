@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>canvas</title>
+    <script src="vendor/pixi.min.js"></script>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+  </body>
+</html>
+<script type="text/javascript">
+  let type = "WebGL"
+  if(!PIXI.utils.isWebGLSupported()){
+    type = "canvas"
+  }
+
+  PIXI.utils.sayHello(type);
+
+  let app = new PIXI.Application({ resizeTo: window });
+
+  document.body.appendChild(app.view);
+
+  let txt = new PIXI.Text("kokoooos", {font: "Comic Sans", size: 80, color: 'white'});
+
+  app.stage.addChild(txt);
+</script>

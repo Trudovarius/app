@@ -41,6 +41,9 @@
           best place to start learning it is this book:
         </p>
         <p>
+          <a href="https://www.w3schools.com/html/" target="_blank">
+            W3 Schools
+          </a>
           <a href="https://www.apress.com/gp/book/9781430247166" target="_blank">
             Foundation Game Design with HTML5 and JavaScript
           </a>
