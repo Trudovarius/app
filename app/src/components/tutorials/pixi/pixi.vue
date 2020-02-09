@@ -4,7 +4,11 @@
     <div class="col-1-of-3">
       <h2>Tutorials</h2>
       <ul>
-        <li><router-link to="/lesson/123">pixi js</router-link></li>
+        <li v-for="lesson in lessons">
+          <router-link :to="`/lesson/pixi/${lesson.id}`">
+            {{ lesson.name }}
+          </router-link>
+        </li>
       </ul>
     </div>
     <div class="col-2-of-3">
@@ -57,9 +61,11 @@
 </template>
 
 <script>
+  import lessons from './lessons.js';
   export default {
     data () {
       return {
+        lessons: []
       }
     },
     computed: {
@@ -73,6 +79,7 @@
     methods: {
     },
     mounted(){
+      this.lessons = lessons;
       if (!this.auth) {
         this.$router.push("/signin");
       }

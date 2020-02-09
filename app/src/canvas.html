@@ -13,28 +13,32 @@
   </body>
 </html>
 <script type="text/javascript">
-  let type = "WebGL"
-  if(!PIXI.utils.isWebGLSupported()){
-    type = "canvas"
-  }
-
-  PIXI.utils.sayHello(type);
+  initPixi();
+  initMsgHandler();
 
   var app = new PIXI.Application({ resizeTo: window });
-
   var stage = app.stage;
-
   document.body.appendChild(app.view);
 
 
-  function executeCode (e) {
-    eval(e.data);
+  function initPixi() {
+    let type = "WebGL"
+    if(!PIXI.utils.isWebGLSupported()){
+      type = "canvas"
+    }
+    PIXI.utils.sayHello(type);
   }
 
-  if (window.addEventListener) {
-    window.addEventListener("message", executeCode, false);
+  function initMsgHandler() {
+    if (window.addEventListener) {
+      window.addEventListener("message", executeCode, false);
+    }
+    else {
+      window.attachEvent("onmessage", executeCode);
+    }
   }
-  else {
-    window.attachEvent("onmessage", executeCode);
+
+  function executeCode (e) {
+    eval(e.data);
   }
 </script>

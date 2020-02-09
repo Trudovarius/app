@@ -1,9 +1,10 @@
 <template>
   <div class="lesson">
     <div class="task">
+      {{ lesson.task }}
     </div>
     <div class="canvas">
-      <iframe id="canvas" src="../src/canvas.html" sandbox="allow-scripts allow-same-origin"></iframe>
+      <iframe id="canvas" src="../../src/canvas.html" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
     <div class="code">
       <form v-on:submit.prevent="onSubmit">
@@ -17,10 +18,12 @@
 </template>
 
 <script>
+  import lessons from './pixi/lessons.js';
   export default {
     data () {
       return {
-        code: ''
+        code: '',
+        lesson: {}
       }
     },
     computed: {
@@ -43,18 +46,18 @@
       if (!this.auth) {
         this.$router.push("/signin");
       } else {
-        $(".console").empty();
-        var former = console.log;
-        console.log = function(msg){
-            // former(msg);  //maintains existing logging via the console.
-            $(".console").append("<div class='line'>" + msg + "</div>");
-            $(".console").scrollTop($(".console")[0].scrollHeight);
-        }
-
-        window.onerror = function(message, url, linenumber) {
-            console.log("JavaScript error: " + message + " on line " +
-                    linenumber + " for " + url);
-        }
+        // $(".console").empty();
+        // var former = console.log;
+        // console.log = function(msg){
+        //     // former(msg);  //maintains existing logging via the console.
+        //     $(".console").append("<div class='line'>" + msg + "</div>");
+        //     $(".console").scrollTop($(".console")[0].scrollHeight);
+        // }
+        //
+        // window.onerror = function(message, url, linenumber) {
+        //     console.log("JavaScript error: " + message + " on line " +
+        //             linenumber + " for " + url);
+        // }
       }
     }
   }

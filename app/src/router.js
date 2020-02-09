@@ -20,7 +20,7 @@ const routes = [
   { path: '/profile', component: Profile },
   { path: '/dashboard', component: Dashboard },
   { path: '/pixi', component: Pixi },
-  { path: '/lesson/:id', component: Lesson }
+  { path: '/lesson/:lib/:id', component: Lesson }
 ];
 
 export default new VueRouter({mode: 'history', routes})
