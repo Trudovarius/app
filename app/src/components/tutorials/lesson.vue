@@ -1,7 +1,7 @@
 <template>
   <div class="lesson">
     <div class="task">
-      {{ lesson.task }}
+      <p v-html="lesson.task"></p>
     </div>
     <div class="canvas">
       <iframe id="canvas" src="../../src/canvas.html" sandbox="allow-scripts allow-same-origin"></iframe>
@@ -39,26 +39,49 @@
         // sending code from textarea to window with canvas
         var iframe = $('#canvas')[0].contentWindow;
         iframe.postMessage(this.code, location.origin);
+        // send lesson code for verification
+        iframe.postMessage(this.lesson.verification);
         return false;
       }
+    },
+    created(){
+      var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+    	var eventer = window[eventMethod];
+    	var messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
+      eventer(messageEvent, function (e) {
+    		if (e.origin !== window.origin) return;
+        console.log(e.data)
+    	});
     },
     mounted(){
       if (!this.auth) {
         this.$router.push("/signin");
-      } else {
-        // $(".console").empty();
-        // var former = console.log;
-        // console.log = function(msg){
-        //     // former(msg);  //maintains existing logging via the console.
-        //     $(".console").append("<div class='line'>" + msg + "</div>");
-        //     $(".console").scrollTop($(".console")[0].scrollHeight);
-        // }
-        //
-        // window.onerror = function(message, url, linenumber) {
-        //     console.log("JavaScript error: " + message + " on line " +
-        //             linenumber + " for " + url);
-        // }
       }
+
+      // import lesson
+      lessons.forEach(lesson => {
+        if (lesson.id === this.$router.currentRoute.params.id)
+          this.lesson = lesson;
+      });
+      // execute lesson setup execute
+      var iframe = $('#canvas')[0].contentWindow;
+      iframe.postMessage(this.lesson.setup, location.origin);
+
+
+
+      // $(".console").empty();
+      // var former = console.log;
+      // console.log = function(msg){
+      //     // former(msg);  //maintains existing logging via the console.
+      //     $(".console").append("<div class='line'>" + msg + "</div>");
+      //     $(".console").scrollTop($(".console")[0].scrollHeight);
+      // }
+      //
+      // window.onerror = function(message, url, linenumber) {
+      //     console.log("JavaScript error: " + message + " on line " +
+      //             linenumber + " for " + url);
+      // }
+
     }
   }
 </script>

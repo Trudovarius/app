@@ -17,9 +17,11 @@
   initMsgHandler();
 
   var app = new PIXI.Application({ resizeTo: window });
+  app.renderer.backgroundColor = 0xFFFFFF;
   var stage = app.stage;
   document.body.appendChild(app.view);
 
+// parent.postMessage("asdfadsfa", "*")
 
   function initPixi() {
     let type = "WebGL"
