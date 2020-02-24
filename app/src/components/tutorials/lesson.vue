@@ -36,22 +36,25 @@
     },
     methods: {
       onSubmit() {
-        // sending code from textarea to window with canvas
         var iframe = $('#canvas')[0].contentWindow;
+        // reset iframe
+        iframe.postMessage("stage.removeChildren()", location.origin);
+        // sending code from textarea to window with canvas
         iframe.postMessage(this.code, location.origin);
         // send lesson code for verification
         iframe.postMessage(this.lesson.verification);
         return false;
+      },
+      onEvent(e) {
+    		if (e.origin !== window.origin) return;
+        console.log(e.data)
       }
     },
     created(){
       var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
     	var eventer = window[eventMethod];
     	var messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
-      eventer(messageEvent, function (e) {
-    		if (e.origin !== window.origin) return;
-        console.log(e.data)
-    	});
+      eventer(messageEvent, this.onEvent);
     },
     mounted(){
       if (!this.auth) {
@@ -82,6 +85,10 @@
       //             linenumber + " for " + url);
       // }
 
+    },
+    beforeDestroy() {
+      var messageEvent = window.addEventListener ? "message" : "onmessage";
+      window.removeEventListener(messageEvent, this.onEvent);
     }
   }
 </script>
