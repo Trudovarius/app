@@ -38,16 +38,23 @@
       onSubmit() {
         var iframe = $('#canvas')[0].contentWindow;
         // reset iframe
-        iframe.postMessage("stage.removeChildren()", location.origin);
+        iframe.postMessage({type: "reset_stage"}, location.origin);
         // sending code from textarea to window with canvas
-        iframe.postMessage(this.code, location.origin);
+        iframe.postMessage({type: "execute", content:this.code}, location.origin);
         // send lesson code for verification
-        iframe.postMessage(this.lesson.verification);
+        iframe.postMessage({type: "verify", lesson_id: this.lesson.id}, location.origin);
         return false;
       },
       onEvent(e) {
     		if (e.origin !== window.origin) return;
         console.log(e.data)
+      },
+      setLesson(id) {
+        // set lesson by id
+        lessons.forEach(lesson => {
+          if (lesson.id === id)
+            this.lesson = lesson;
+        });
       }
     },
     created(){
@@ -60,31 +67,15 @@
       if (!this.auth) {
         this.$router.push("/signin");
       }
-
-      // import lesson
-      lessons.forEach(lesson => {
-        if (lesson.id === this.$router.currentRoute.params.id)
-          this.lesson = lesson;
-      });
-      // execute lesson setup execute
+      this.setLesson(this.$router.currentRoute.params.id);
       var iframe = $('#canvas')[0].contentWindow;
-      iframe.postMessage(this.lesson.setup, location.origin);
-
-
-
-      // $(".console").empty();
-      // var former = console.log;
-      // console.log = function(msg){
-      //     // former(msg);  //maintains existing logging via the console.
-      //     $(".console").append("<div class='line'>" + msg + "</div>");
-      //     $(".console").scrollTop($(".console")[0].scrollHeight);
-      // }
-      //
-      // window.onerror = function(message, url, linenumber) {
-      //     console.log("JavaScript error: " + message + " on line " +
-      //             linenumber + " for " + url);
-      // }
-
+      iframe.addEventListener("load", () => {
+          // set lesson in canvas
+          iframe.postMessage(
+            { type: "setup", content:  this.lesson.id },
+            location.origin
+          );
+      });
     },
     beforeDestroy() {
       var messageEvent = window.addEventListener ? "message" : "onmessage";

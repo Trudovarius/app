@@ -12,7 +12,8 @@
   <body>
   </body>
 </html>
-<script type="text/javascript">
+<script type="module">
+  import lessons from "./components/tutorials/pixi/graphics.js";
   initPixi();
   initMsgHandler();
 
@@ -20,6 +21,8 @@
   app.renderer.backgroundColor = 0xFFFFFF;
   var stage = app.stage;
   document.body.appendChild(app.view);
+
+  window.lesson = undefined;
 
 // parent.postMessage("asdfadsfa", "*")
 
@@ -33,14 +36,52 @@
 
   function initMsgHandler() {
     if (window.addEventListener) {
-      window.addEventListener("message", executeCode, false);
+      window.addEventListener("message", messangHandler, false);
     }
     else {
-      window.attachEvent("onmessage", executeCode);
+      window.attachEvent("onmessage", messangHandler);
     }
   }
 
-  function executeCode (e) {
-    eval(e.data);
+  function messangHandler(msg) {
+    console.log(msg)
+    switch(msg.data.type) {
+      case 'setup':
+        let lesson = getLessonById(msg.data.content);
+        lesson.setup(stage);
+        break;
+      case "execute":
+        executeCode(msg.data.content);
+        break;
+      case "result":
+        break;
+      case "reset_stage":
+        stage.removeChildren();
+        break;
+      case "verify":
+        let result = getLessonById(msg.data.lesson_id).verification(stage);
+        if (result === "SUCCESS!!") {
+          window.parent.postMessage({ type: "result", content: result, pass: true}, location.origin);
+        } else {
+          window.parent.postMessage({ type: "result", content: result, pass: false}, location.origin);
+        }
+        break;
+      default:
+        return;
+    }
+  }
+
+  function getLessonById(id) {
+    let lesson;
+    lessons.forEach(l => {
+      if (l.id === id) {
+        lesson = l;
+      }
+    });
+    return lesson;
+  }
+
+  function executeCode (code) {
+    eval(code);
   }
 </script>
