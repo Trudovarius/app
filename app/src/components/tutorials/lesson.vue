@@ -8,7 +8,8 @@
     </div>
     <div class="code">
       <form v-on:submit.prevent="onSubmit">
-        <textarea placeholder="Type your code here:" v-model="code"></textarea>
+        <label for="code">Type your code here:</label>
+        <textarea :placeholder="lesson.code" v-model="code" name="code"></textarea>
         <button>Execute!</button>
       </form>
     </div>
@@ -42,7 +43,13 @@
         // sending code from textarea to window with canvas
         iframe.postMessage({type: "execute", content:this.code}, location.origin);
         // send lesson code for verification
-        iframe.postMessage({type: "verify", lesson_id: this.lesson.id}, location.origin);
+        iframe.postMessage({
+            type: "verify",
+            lesson_id: this.lesson.id,
+            category_id: this.$router.currentRoute.params.id
+          },
+          location.origin
+        );
         return false;
       },
       onEvent(e) {

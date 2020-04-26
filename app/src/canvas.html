@@ -59,7 +59,7 @@
         stage.removeChildren();
         break;
       case "verify":
-        let result = getLessonById(msg.data.lesson_id).verification(stage);
+        let result = getLessonById(msg.data.lesson_id, msg.data.category_id).verification(stage);
         if (result === "SUCCESS!!") {
           window.parent.postMessage({ type: "result", content: result, pass: true}, location.origin);
         } else {
@@ -78,8 +78,10 @@
         for (let lesson of category.lessons) {
           if (lesson.id === lesson_id) {
             ret = lesson;
+            break;
           }
         }
+        break;
       }
     }
     return ret;
