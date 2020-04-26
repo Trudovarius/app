@@ -13,7 +13,7 @@
   </body>
 </html>
 <script type="module">
-  import lessons from "./components/tutorials/pixi/graphics.js";
+  import categories from "./components/tutorials/pixi/lessons.js";
   initPixi();
   initMsgHandler();
 
@@ -47,7 +47,7 @@
     console.log(msg)
     switch(msg.data.type) {
       case 'setup':
-        let lesson = getLessonById(msg.data.content);
+        let lesson = getLessonById(msg.data.lesson_id, msg.data.category_id);
         lesson.setup(stage);
         break;
       case "execute":
@@ -71,14 +71,18 @@
     }
   }
 
-  function getLessonById(id) {
-    let lesson;
-    lessons.forEach(l => {
-      if (l.id === id) {
-        lesson = l;
+  function getLessonById(lesson_id, category_id) {
+    let ret;
+    for (let category of categories) {
+      if (category.id === category_id) {
+        for (let lesson of category.lessons) {
+          if (lesson.id === lesson_id) {
+            ret = lesson;
+          }
+        }
       }
-    });
-    return lesson;
+    }
+    return ret;
   }
 
   function executeCode (code) {

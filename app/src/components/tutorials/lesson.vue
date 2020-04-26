@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import lessons from './pixi/lessons.js';
+  import categories from './pixi/lessons.js';
   export default {
     data () {
       return {
@@ -50,11 +50,15 @@
         console.log(e.data)
       },
       setLesson(id) {
-        // set lesson by id
-        lessons.forEach(lesson => {
-          if (lesson.id === id)
-            this.lesson = lesson;
-        });
+        // set lesson by category
+        for (let category of categories) {
+          // generate random lesson
+          if (category.id === id) {
+            let i = Math.floor(Math.random()*category.lessons.length);
+            this.lesson = category.lessons[i];
+            break;
+          }
+        }
       }
     },
     created(){
@@ -72,7 +76,7 @@
       iframe.addEventListener("load", () => {
           // set lesson in canvas
           iframe.postMessage(
-            { type: "setup", content:  this.lesson.id },
+            { type: "setup", lesson_id: this.lesson.id, category_id: this.$router.currentRoute.params.id },
             location.origin
           );
       });

@@ -61,11 +61,12 @@
 </template>
 
 <script>
-  import lessons from './lessons.js';
+  import categories from './lessons.js';
   export default {
     data () {
       return {
-        lessons: []
+        lessons: [],
+
       }
     },
     computed: {
@@ -79,7 +80,7 @@
     methods: {
     },
     mounted(){
-      this.lessons = lessons;
+      this.lessons = categories;
       if (!this.auth) {
         this.$router.push("/signin");
       }

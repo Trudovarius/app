@@ -13,7 +13,7 @@ function checkGraphicsData(stage) {
 //   stage.addChild(new PIXI.Graphics().beginFill(0xFF00FF).drawRect(50,50,100,100).endFill());
 
 
-var graphics = [
+var squares = [
   {
     id: "graphics-square-1",
     name: "PIXI.Graphics Square",
@@ -22,7 +22,7 @@ var graphics = [
           "height 100px. <br> Use functions <i>beginFill</i> and <i>drawRect</i>.<br>" +
           "Add it to stage using <i>stage.addChild()</i>. <br> Check the documentation for " +
           "<a href='https://pixijs.download/dev/docs/PIXI.Graphics.html' target='_blank'>PIXI.Graphics</a>.",
-    setup: (stage) => {console.log("setup graphics 1")},
+    setup: (stage) => {},
     verification: (stage) => {
       let check = checkGraphicsData(stage);
       if (check === true) {
@@ -88,7 +88,10 @@ var graphics = [
         return check;
       }
     }
-  },
+  }
+];
+
+var circles = [
   {
     id: "graphics-circle-1",
     name: "PIXI.Graphics Circle",
@@ -142,7 +145,10 @@ var graphics = [
     }
   }
 ];
-export default graphics;
+export default {
+  squares,
+  circles
+};
 
 
 // if (stage.children.length === 0) {
