@@ -12,6 +12,7 @@ module.exports = (app, passport) => {
     res.json({ authenticated: req.isAuthenticated() , user: user });
   });
 
+  // LOGIN ---------------------------------------------------------------------
   app.get('/login', (req, res) => {
     res.render('login.ejs', { message: req.flash('loginMessage') });
   });
@@ -38,7 +39,7 @@ module.exports = (app, passport) => {
     })(req, res, next);
   });
 
-
+  // SIGNUP --------------------------------------------------------------------
   app.get('/signup', (req, res) => {
     var captcha= svgCaptcha.create();
     req.session.captcha = captcha.text;
