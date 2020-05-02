@@ -14,6 +14,7 @@ export default new Vuex.Store({
   },
   mutations: {
     authUser (state, userData) {
+      console.log(userData)
       state.userId = userData.userId,
       state.userName = userData.userName
     },
@@ -60,6 +61,7 @@ export default new Vuex.Store({
           const now = new Date();
           const expirationDate = new Date(now.getTime() + 3600*1000);
           let user = {
+            id: res.data.user._id,
             name: res.data.user.name,
             email: res.data.user.email,
             level: res.data.user.level,
@@ -79,18 +81,16 @@ export default new Vuex.Store({
         .catch(error => console.log(error));
     },
     tryAutoLogin ({commit}) {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        return;
-      }
       const expirationDate = localStorage.getItem('expirationDate');
       const now = new Date();
       if (now >= expirationDate) {
         return;
       }
-      const userId = localStorage.getItem('userId');
+      const user = JSON.parse(localStorage.getItem('user'));
+      console.log(user)
       commit('authUser', {
-        userId: userId
+        userId: user.id,
+        userName: user.name
       });
     },
     logout({commit}) {
@@ -124,6 +124,27 @@ export default new Vuex.Store({
             commit('storeUser', users[0]);
           })
           .catch(error => console.log(error));
+    },
+    getCategoriesTaken({commit, state}, data) {
+      return axios.post('/cagetory/started/get', {
+        id: data.id
+      }).then(res => {
+        return res.data;
+      })
+    },
+    createCategoryTaken({commit, state}, data) {
+      axios.post('/category/start', {
+        userId: data.userId,
+        categoryId: data.categoryId,
+        difficulty: data.difficulty
+      });
+    },
+    createCategory({commit, state}, data) {
+      axios.post('/category/create', {
+        name: data.name,
+        awardXp: data.awardXp,
+        course: data.course
+      });
     }
   },
   getters: {
@@ -131,6 +152,7 @@ export default new Vuex.Store({
       return state.userName;
     },
     isAuthenticated(state) {
+      console.log(state)
       return state.userId !== null;
     },
     user(state) {

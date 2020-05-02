@@ -29,7 +29,7 @@ app.use(cors());
 
 
 require('./routes/user.js')(app, passport);
-require('./routes/categorySaved.js')(app, passport);
+require('./routes/category.js')(app, passport);
 
 
 app.set('view engine', 'ejs');

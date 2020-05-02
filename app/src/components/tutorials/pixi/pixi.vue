@@ -4,10 +4,10 @@
     <div class="col-1-of-3">
       <h2>Tutorials</h2>
       <ul>
-        <li v-for="lesson in lessons">
-          <router-link :to="`/lesson/pixi/${lesson.id}`">
-            {{ lesson.name }}
-          </router-link>
+        <li v-for="category in categories">
+          <a href="#" @click="openCategory(category.id, $event)" >
+            {{ category.name }}
+          </a>
         </li>
       </ul>
     </div>
@@ -65,8 +65,8 @@
   export default {
     data () {
       return {
-        lessons: [],
-
+        categories: [],
+        categoriesTaken: []
       }
     },
     computed: {
@@ -78,12 +78,44 @@
       }
     },
     methods: {
+      openCategory(id, e) {
+        console.log("bohaaa", e, id)
+        e.preventDefault();
+        for (let categoryTaken of this.categoriesTaken) {
+          if (categoryTaken.categoryId == id) {
+            console.log("KOKOOOOOS")
+            this.$router.push("/lesson/pixi/" + id);
+            return;
+          }
+        }
+        this.$store.dispatch('createCategoryTaken', {
+          userId: this.user.id,
+          categoryId: id,
+          difficulty: 1
+        }).then(() => {
+          this.$router.push("/lesson/pixi/" + id);
+        });
+      },
+      getCategories() {
+        this.$store.dispatch('getCategoriesTaken', {
+          id: this.user.id
+        }).then((res) => {
+          this.categoriesTaken = res;
+        });
+      }
     },
     mounted(){
-      this.lessons = categories;
+      this.categories = categories;
       if (!this.auth) {
         this.$router.push("/signin");
       }
+      this.getCategories();
+      /// CREATE CATEGORY
+      // this.$store.dispatch('createCategory', {
+      //   name: "pixi-graphics-polygon",
+      //   awardXp: 100,
+      //   course: "XDD"
+      // });
     }
   }
 </script>
