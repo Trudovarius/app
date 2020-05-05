@@ -30,6 +30,7 @@ app.use(cors());
 
 require('./routes/user.js')(app, passport);
 require('./routes/category.js')(app, passport);
+require('./routes/lessons.js')(app, passport);
 
 
 app.set('view engine', 'ejs');

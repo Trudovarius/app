@@ -84,9 +84,9 @@ var squares = [
       let check = checkGraphicsData(stage);
       if (check === true) {
         let shape = stage.children[0].geometry.graphicsData[0].shape;
-        parent.postMessage(checkRect(stage, shape, 50, 50, 100, 100), '*');
+        return checkRect(stage, shape, 50, 50, 100, 100);
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -102,9 +102,9 @@ var squares = [
       let check = checkGraphicsData(stage);
       if (check === true) {
         let shape = stage.children[0].geometry.graphicsData[0].shape;
-        parent.postMessage(checkRect(stage, shape, 333, 100, 200, 69), '*');
+        return checkRect(stage, shape, 333, 100, 200, 69);
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -120,9 +120,9 @@ var squares = [
       let check = checkGraphicsData(stage);
       if (check === true) {
         let shape = stage.children[0].geometry.graphicsData[0].shape;
-        parent.postMessage(checkRect(stage, shape, 10, 123, 400, 200), '*');
+        return checkRect(stage, shape, 10, 123, 400, 200);
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -138,9 +138,9 @@ var squares = [
       let check = checkGraphicsData(stage);
       if (check === true) {
         let shape = stage.children[0].geometry.graphicsData[0].shape;
-        parent.postMessage(checkRect(stage, shape, 0, 0, 400, 500), '*');
+        return checkRect(stage, shape, 0, 0, 400, 500);
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -156,9 +156,9 @@ var squares = [
       let check = checkGraphicsData(stage);
       if (check === true) {
         let data = stage.children[0].geometry.graphicsData[0];
-        parent.postMessage(checkRectAndColor(stage, data, 150, 0, 250, 10, 0xff3399), '*');
+        return checkRectAndColor(stage, data, 150, 0, 250, 10, 0xff3399);
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -174,9 +174,9 @@ var squares = [
       let check = checkGraphicsData(stage);
       if (check === true) {
         let data = stage.children[0].geometry.graphicsData[0];
-        parent.postMessage(checkRectAndColor(stage, data, 150, 150, -140, -130, 0xe60000), '*');
+        return checkRectAndColor(stage, data, 150, 150, -140, -130, 0xe60000);
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -191,9 +191,9 @@ var squares = [
       let check = checkGraphicsData(stage);
       if (check === true) {
         let data = stage.children[0].geometry.graphicsData[0];
-        parent.postMessage(checkRectAndColor(stage, data, 300, 400, 50, -200, 0xe6e600), '*');
+        return checkRectAndColor(stage, data, 300, 400, 50, -200, 0xe6e600);
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -208,9 +208,9 @@ var squares = [
       let check = checkGraphicsData(stage);
       if (check === true) {
         let data = stage.children[0].geometry.graphicsData[0];
-        parent.postMessage(checkRectAndColor(stage, data, 500, 500, -500, -500, 0x4d4d00), '*');
+        return checkRectAndColor(stage, data, 500, 500, -500, -500, 0x4d4d00);
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -231,16 +231,16 @@ var squares = [
         let data2 = stage.children[1].geometry.graphicsData[0];
         let res2 = checkRectAndColor(stage, data2, 100, 100, 200, 200, 0xffffff);
         if (res1 === "SUCCESS!!" && res2 === "SUCCESS!!") {
-          parent.postMessage(res1, '*');
+          return res1;
         } else if (res1 === "SUCCESS!!") {
-          parent.postMessage(res2, '*');
+          return res2;
         } else if (res2 === "SUCCESS!!") {
-          parent.postMessage(res1, '*');
+          return res1;
         } else {
-          parent.postMessage(res1, '*');
+          return res1;
         }
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -261,16 +261,16 @@ var squares = [
         let data2 = stage.children[1].geometry.graphicsData[0];
         let res2 = checkRectAndColor(stage, data2, 321, 16, -200, 45, 0x0000FF);
         if (res1 === "SUCCESS!!" && res2 === "SUCCESS!!") {
-          parent.postMessage(res1, '*');
+          return res1;
         } else if (res1 === "SUCCESS!!") {
-          parent.postMessage(res2, '*');
+          return res2;
         } else if (res2 === "SUCCESS!!") {
-          parent.postMessage(res1, '*');
+          return res1;
         } else {
-          parent.postMessage(res1, '*');
+          return res1;
         }
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   }
@@ -291,15 +291,15 @@ var circles = [
         let shape = stage.children[0].geometry.graphicsData[0].shape;
         if (shape.type === 2 && shape.x === 120 && shape.y === 80 && shape.radius === 42) {
           if (stage.children[0].geometry.graphicsData[0].fillStyle.color === 0x000000) {
-            parent.postMessage('SUCCESS!!', '*');
+            return 'SUCCESS!!';
           } else {
-            parent.postMessage('Wrong color!', '*');
+            return 'Wrong color!';
           }
         } else {
-          parent.postMessage('Wrong shape!', '*');
+          return 'Wrong shape!';
         }
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   },
@@ -315,7 +315,7 @@ var circles = [
       let check = checkGraphicsData(stage);
       if (check === true) {
       } else {
-        parent.postMessage(check, '*');
+        return check;
       }
     }
   }
@@ -327,14 +327,14 @@ export default {
 
 
 // if (stage.children.length === 0) {
-//   parent.postMessage('Add the shape to stage', '*');
+//   return 'Add the shape to stage';
 // } else if (!stage.children[0].graphicsData) {
-//   parent.postMessage('Problem with the shape.', '*');
+//   return 'Problem with the shape.';
 // } else {
 //   let shape = stage.children[0].graphicsData[0].shape;
 //   if (stage.children[0].x === 64 && stage.children[0].y === 130 && shape.radius === 32) {
-//     parent.postMessage('SUCCESS!!', '*');
+//     return 'SUCCESS!!';
 //   } else {
-//     parent.postMessage('Error!', '*');
+//     return 'Error!';
 //   }
 // }

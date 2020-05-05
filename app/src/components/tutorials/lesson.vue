@@ -24,7 +24,8 @@
     data () {
       return {
         code: '',
-        lesson: {}
+        lesson: {},
+        attempts: 0
       }
     },
     computed: {
@@ -55,17 +56,53 @@
       onEvent(e) {
     		if (e.origin !== window.origin) return;
         console.log(e.data)
-      },
-      setLesson(id) {
-        // set lesson by category
-        for (let category of categories) {
-          // generate random lesson
-          if (category.id === id) {
-            let i = Math.floor(Math.random()*category.lessons.length);
-            this.lesson = category.lessons[i];
-            break;
+        if (e.data.type && e.data.type === "result") {
+          this.attempts++;
+          if (e.data.pass) {
+            // TODO show passed message
+            this.$store.dispatch('completedLesson', {
+              lessonId: this.lesson.id,
+              userId: this.user.id,
+              categoryId: this.$router.currentRoute.params.id,
+              difficulty: this.lesson.difficulty,
+              attempts: this.attempts
+            });
+          } else {
+            // TODO show fail message
           }
         }
+      },
+      async setLesson(id) {
+        // get completed lessons
+        let lessonsCompleted = await this.$store.dispatch('getCompletedLessons', {
+          userId: this.user.id,
+          categoryId: id
+        });
+        // get category progress
+        let categoryStarted = await this.$store.dispatch('getCategoriesTaken', {
+          userId: this.user.id,
+          categoryId: id
+        });
+        categoryStarted = categoryStarted[0]
+        for (let category of categories) {
+          if (category.id === id) {
+            for (let lesson of category.lessons) {
+              if (lesson.difficulty >= categoryStarted.difficulty && !this.isCompleted([...lessonsCompleted], lesson)) {
+                // TODO pick only the not completed lessons
+                this.lesson = lesson;
+                return;
+              }
+            }
+          }
+        }
+      },
+      isCompleted(array, lesson) {
+        for (let l of array) {
+          if (l.lessonId === lesson.id) {
+            return true;
+          }
+        }
+        return false;
       }
     },
     created(){
@@ -74,11 +111,12 @@
     	var messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
       eventer(messageEvent, this.onEvent);
     },
-    mounted(){
+    async mounted(){
       if (!this.auth) {
         this.$router.push("/signin");
       }
-      this.setLesson(this.$router.currentRoute.params.id);
+      this.attemts = 0;
+      await this.setLesson(this.$router.currentRoute.params.id);
       var iframe = $('#canvas')[0].contentWindow;
       iframe.addEventListener("load", () => {
           // set lesson in canvas

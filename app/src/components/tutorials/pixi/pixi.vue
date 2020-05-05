@@ -79,11 +79,9 @@
     },
     methods: {
       openCategory(id, e) {
-        console.log("bohaaa", e, id)
         e.preventDefault();
         for (let categoryTaken of this.categoriesTaken) {
           if (categoryTaken.categoryId == id) {
-            console.log("KOKOOOOOS")
             this.$router.push("/lesson/pixi/" + id);
             return;
           }
@@ -98,7 +96,7 @@
       },
       getCategories() {
         this.$store.dispatch('getCategoriesTaken', {
-          id: this.user.id
+          userId: this.user.id
         }).then((res) => {
           this.categoriesTaken = res;
         });

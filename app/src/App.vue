@@ -17,7 +17,6 @@
     computed: {
     },
     created() {
-      console.log("kokos")
       this.$store.dispatch('tryAutoLogin');
     }
   }

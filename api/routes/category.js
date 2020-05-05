@@ -18,10 +18,19 @@ module.exports = (app, passport) => {
     });
   });
 
-  // GET STARTED CATEGORIES BY USER ID
+  // GET STARTED ALL CATEGORIES BY USER ID
   app.post('/cagetory/started/get', async (req, res) => {
-    let categoriesStarted = await CategoryStarted.find({ userId: req.body.id});
-    res.json(categoriesStarted);
+    let categoryStarted;
+    if (req.body.userId && req.body.categoryId) {
+      categoryStarted = await CategoryStarted.find(
+      {
+          userId: req.body.userId,
+          categoryId: req.body.categoryId
+      });
+    } else if (req.body.userId) {
+      categoryStarted = await CategoryStarted.find({ userId: req.body.userId});
+    }
+    res.json(categoryStarted);
   });
 
   // CREATE CATEGORY
