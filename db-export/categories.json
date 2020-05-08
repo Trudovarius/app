@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "5ead650ebf8918275c1cf3e8"
+  },
+  "name": "pixi-graphics-square",
+  "awardXp": 100,
+  "course": "XDD",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ead6592bf8918275c1cf3eb"
+  },
+  "name": "pixi-graphics-circle",
+  "awardXp": 100,
+  "course": "XDD",
+  "__v": 0
+}]

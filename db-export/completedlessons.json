@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "5eb53f474f448f227c036fad"
+  },
+  "createdAt": {
+    "$date": "2020-05-08T11:15:19.656Z"
+  },
+  "lessonId": "graphics-square-1",
+  "userId": "5e2c48269a01aa26885c4030",
+  "categoryId": "pixi-graphics-square",
+  "difficulty": 1,
+  "attempts": 1,
+  "duration": 21910,
+  "__v": 0
+}]

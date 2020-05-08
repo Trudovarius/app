@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "5eb53ae7462e07291cd7e7ac"
+  },
+  "createdAt": {
+    "$date": "2020-05-08T10:56:39.623Z"
+  },
+  "userId": "5e2c48269a01aa26885c4030",
+  "categoryId": "pixi-graphics-square",
+  "difficulty": 3,
+  "__v": 0
+}]
