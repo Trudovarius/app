@@ -25,7 +25,8 @@
       return {
         code: '',
         lesson: {},
-        attempts: 0
+        attempts: 0,
+        startTime: 0
       }
     },
     computed: {
@@ -53,20 +54,26 @@
         );
         return false;
       },
-      onEvent(e) {
+      async onEvent(e) {
     		if (e.origin !== window.origin) return;
         console.log(e.data)
+        // react only to messages of type result from iframe
         if (e.data.type && e.data.type === "result") {
           this.attempts++;
           if (e.data.pass) {
+            let duration = this.getDuration();
             // TODO show passed message
-            this.$store.dispatch('completedLesson', {
+            // insert into database that user completed this lesson
+            await this.$store.dispatch('completedLesson', {
               lessonId: this.lesson.id,
               userId: this.user.id,
               categoryId: this.$router.currentRoute.params.id,
               difficulty: this.lesson.difficulty,
-              attempts: this.attempts
+              attempts: this.attempts,
+              duration: duration
             });
+            // adjust difficulty by user performance
+            await this.adjustDifficulty(this.attempts, duration);
           } else {
             // TODO show fail message
           }
@@ -83,29 +90,66 @@
           userId: this.user.id,
           categoryId: id
         });
-        categoryStarted = categoryStarted[0]
+        categoryStarted = categoryStarted[0];
         for (let category of categories) {
           if (category.id === id) {
             for (let lesson of category.lessons) {
+              // is lesson the right difficulty and not completed?
               if (lesson.difficulty >= categoryStarted.difficulty && !this.isCompleted([...lessonsCompleted], lesson)) {
-                // TODO pick only the not completed lessons
                 this.lesson = lesson;
                 return;
               }
             }
           }
         }
+        // TODO category competed
       },
+      /**
+      * This functions iterates through array of completed lessons and returns true if it contains
+      * lesson with the same id as in 2nd parameter, false if not
+      * array - array of completed lessons for this user id and category
+      * lesson - lesson
+      */
       isCompleted(array, lesson) {
+        // check if completed
         for (let l of array) {
           if (l.lessonId === lesson.id) {
             return true;
           }
         }
         return false;
+      },
+      getDuration() {
+        // return time passed since start
+        return Date.now() - this.startTime;
+      },
+      async adjustDifficulty(attempts, duration, categoryStarted) {
+        duration = duration / 1000; // to seconds
+        let newDifficulty = this.lesson.difficulty;
+        // if user completed it in less than 1 minute, increase by 2
+        if (duration < 60 && attempts === 1) {
+          newDifficulty += 2;
+        // if user completed it in less than 3 attempts, increase by 1
+        } else if (attempts < 3 || duration < 300) {
+          newDifficulty++;
+        }
+        // check bounds
+        if (newDifficulty > 5) {
+          newDifficulty = 5;
+        }
+        if (newDifficulty < 1) {
+          newDifficulty = 1;
+        }
+        // save to database
+        await this.$store.dispatch('updateDifficulty', {
+            userId: this.user.id,
+            categoryId: this.$router.currentRoute.params.id,
+            difficulty: newDifficulty
+        });
       }
     },
     created(){
+      // init event listener for messages from iframe
       var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
     	var eventer = window[eventMethod];
     	var messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
@@ -115,10 +159,11 @@
       if (!this.auth) {
         this.$router.push("/signin");
       }
-      this.attemts = 0;
-      await this.setLesson(this.$router.currentRoute.params.id);
+      this.attemts = 0;  // init number of attempts
+      this.startTime = Date.now(); // save time of start
+      await this.setLesson(this.$router.currentRoute.params.id); // set lesson
       var iframe = $('#canvas')[0].contentWindow;
-      iframe.addEventListener("load", () => {
+      iframe.addEventListener("load", () => { // init iframe
           // set lesson in canvas
           iframe.postMessage(
             { type: "setup", lesson_id: this.lesson.id, category_id: this.$router.currentRoute.params.id },

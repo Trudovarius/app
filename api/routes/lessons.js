@@ -11,6 +11,7 @@ module.exports = (app, passport) => {
     completedLesson.categoryId = req.body.categoryId;
     completedLesson.difficulty = req.body.difficulty;
     completedLesson.attempts = req.body.attempts;
+    completedLesson.duration = req.body.duration;
     completedLesson.save((err, saved) => {
       if (err != null) {
         res.json(err);

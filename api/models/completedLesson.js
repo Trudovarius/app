@@ -8,6 +8,7 @@ var completedLessonSchema = mongoose.Schema({
   categoryId : String,
   difficulty : Number,
   attempts   : Number,
+  duration   : Number,
   createdAt  : {
     type: Date,
     default: Date.now

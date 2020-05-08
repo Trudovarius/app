@@ -150,13 +150,24 @@ export default new Vuex.Store({
         userId: data.userId,
         categoryId: data.categoryId,
         difficulty: data.difficulty,
-        attempts: data.attempts
+        attempts: data.attempts,
+        duration: data.duration
       });
     },
     getCompletedLessons({commit, state}, data) {
       return axios.post('/completed-lesson/get', {
         userId: data.userId,
         categoryId: data.categoryId,
+      }).then(res => {
+        console.log(res)
+        return res.data;
+      });
+    },
+    updateDifficulty({commit, state}, data) {
+      return axios.post('/category/started/update', {
+        userId: data.userId,
+        categoryId: data.categoryId,
+        difficulty: data.difficulty
       }).then(res => {
         console.log(res)
         return res.data;

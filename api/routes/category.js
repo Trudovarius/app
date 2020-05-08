@@ -48,4 +48,18 @@ module.exports = (app, passport) => {
       }
     });
   });
+
+  // UPDATE STARTED CATEGORY
+  app.post('/category/started/update', async (req, res) => {
+    let categoryStarted = CategoryStarted.findOneAndUpdate({
+      userId: req.body.userId,
+      categoryId: req.body.categoryId,
+    }, {difficulty: req.body.difficulty}, { upsert: true }).then((err, saved) => {
+      if (err != null) {
+        res.json(err);
+      } else {
+        res.json(saved);
+      }
+    });
+  });
 }
