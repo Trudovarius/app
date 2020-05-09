@@ -44,7 +44,6 @@
   }
 
   function messangHandler(msg) {
-    console.log(msg)
     switch(msg.data.type) {
       case 'setup':
         let lesson = getLessonById(msg.data.lesson_id, msg.data.category_id);
@@ -88,6 +87,10 @@
   }
 
   function executeCode (code) {
-    eval(code);
+    try {
+      eval(code);
+    } catch (e) {
+      window.parent.postMessage({ type: "error", content: e}, location.origin);
+    }
   }
 </script>

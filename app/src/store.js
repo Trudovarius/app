@@ -144,7 +144,6 @@ export default new Vuex.Store({
       });
     },
     completedLesson({commit, state}, data) {
-      console.log(data.attempts)
       axios.post('/completed-lesson/create', {
         lessonId: data.lessonId,
         userId: data.userId,
@@ -159,7 +158,6 @@ export default new Vuex.Store({
         userId: data.userId,
         categoryId: data.categoryId,
       }).then(res => {
-        console.log(res)
         return res.data;
       });
     },
@@ -169,7 +167,6 @@ export default new Vuex.Store({
         categoryId: data.categoryId,
         difficulty: data.difficulty
       }).then(res => {
-        console.log(res)
         return res.data;
       });
     }

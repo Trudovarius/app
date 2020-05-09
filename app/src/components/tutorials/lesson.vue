@@ -15,6 +15,17 @@
     </div>
     <div class="console">
     </div>
+    <div class="result-message shadow">
+      <div class="result-message-text">SUCCESS!!</div>
+      <div class="result-message-stats">
+        <div class="result-message-duration"></div>
+        <div class="result-message-attempts"></div>
+      </div>
+      <div class="result-message-buttons">
+        <button class="result-message-menu-btn shadow" @click="toMenu">Menu</button>
+        <button class="result-message-next-btn shadow" @click="nextLesson">Next Lesson >></button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,6 +49,7 @@
       }
     },
     methods: {
+      // submit user code, send messages to iframe to execute and verify input
       onSubmit() {
         var iframe = $('#canvas')[0].contentWindow;
         // reset iframe
@@ -54,15 +66,15 @@
         );
         return false;
       },
+      // functions that gets called on every message from iframe
       async onEvent(e) {
     		if (e.origin !== window.origin) return;
-        console.log(e.data)
         // react only to messages of type result from iframe
         if (e.data.type && e.data.type === "result") {
           this.attempts++;
           if (e.data.pass) {
             let duration = this.getDuration();
-            // TODO show passed message
+            this.showMessage(duration/1000, this.attempts);
             // insert into database that user completed this lesson
             await this.$store.dispatch('completedLesson', {
               lessonId: this.lesson.id,
@@ -75,8 +87,10 @@
             // adjust difficulty by user performance
             await this.adjustDifficulty(this.attempts, duration);
           } else {
-            // TODO show fail message
+            console.log("Error: " + e.data.content);
           }
+        } else if (e.data.type === "error") {
+          console.error(e.data.content);
         }
       },
       async setLesson(id) {
@@ -91,6 +105,7 @@
           categoryId: id
         });
         categoryStarted = categoryStarted[0];
+        // compare category id and lessons id
         for (let category of categories) {
           if (category.id === id) {
             for (let lesson of category.lessons) {
@@ -102,7 +117,7 @@
             }
           }
         }
-        // TODO category competed
+        // TODO category completed
       },
       /**
       * This functions iterates through array of completed lessons and returns true if it contains
@@ -119,15 +134,16 @@
         }
         return false;
       },
+      // return time passed since start
       getDuration() {
-        // return time passed since start
         return Date.now() - this.startTime;
       },
+      // update difficulty by user performance and update database record
       async adjustDifficulty(attempts, duration, categoryStarted) {
         duration = duration / 1000; // to seconds
         let newDifficulty = this.lesson.difficulty;
-        // if user completed it in less than 1 minute, increase by 2
-        if (duration < 60 && attempts === 1) {
+        // if user completed it in less than 30 seconds, increase by 2
+        if (duration < 30 && attempts === 1) {
           newDifficulty += 2;
         // if user completed it in less than 3 attempts, increase by 1
         } else if (attempts < 3 || duration < 300) {
@@ -146,6 +162,42 @@
             categoryId: this.$router.currentRoute.params.id,
             difficulty: newDifficulty
         });
+      },
+      // show and update content of the result-message element
+      showMessage(duration, attempts) {
+        $('.result-message')[0].style.display = "flex";
+        if (duration >= 60) {
+          $('.result-message-duration')[0].innerHTML = 'Duration: '+Math.floor(duration/60)+"m " + Math.floor(duration%60)+"s";
+        } else {
+          $('.result-message-duration')[0].innerHTML = 'Duration: '+Math.floor(duration%60)+"s";
+        }
+        $('.result-message-attempts')[0].innerHTML = 'Attempts: '+attempts;
+      },
+      // redirect to pixi home
+      toMenu() {
+        this.$router.push('/'+this.$router.currentRoute.params.lib);
+      },
+      // refresh page to display next lesson
+      nextLesson() {
+        this.$router.go();
+      },
+      // redirect messages from console to html element
+      setupConsole() {
+        $(".console").empty();
+        var former = console.log;
+        console.log = (msg) => {
+            // former(msg);  //maintains existing logging via the console.
+            $(".console").append("<div class='line'>" + msg + "</div>");
+            $(".console").scrollTop($(".console")[0].scrollHeight);
+        };
+        console.error = (msg) => {
+          $(".console").append("<div class='line error'>" + msg + "</div>");
+          $(".console").scrollTop($(".console")[0].scrollHeight);
+        }
+        window.onerror = (message, url, linenumber) => {
+            console.log("JavaScript error: " + message + " on line " +
+                    linenumber + " for " + url);
+        }
       }
     },
     created(){
@@ -170,6 +222,7 @@
             location.origin
           );
       });
+      this.setupConsole();
     },
     beforeDestroy() {
       var messageEvent = window.addEventListener ? "message" : "onmessage";

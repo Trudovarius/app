@@ -74,5 +74,91 @@
         margin-right: 1.5rem;
       }
     }
+
+    .error {
+      color: red;
+    }
+  }
+
+  .result-message {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 1px solid $color-grey-light-2;
+    width: 500px;
+    height: 250px;
+    border-radius: 50px;
+    background-color: white;
+    display: none;
+    flex-direction: column;
+
+    &-text {
+      color: $color-primary-light;
+      font-weight: bold;
+      font-size: 3em;
+      margin-top: 50px;
+      margin-bottom: 25px;
+    }
+
+    &-stats {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &-duration {
+      width: 100%;
+    }
+
+    &-attempts {
+      width: 100%;
+    }
+
+    &-buttons {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    &-menu-btn {
+      background-color: #F4F9F4;
+      padding: 10px;
+      border-radius: 50px;
+      border: 1px solid $color-grey-light-2;
+      width: 30%;
+
+      &:hover {
+        background-color: $color-primary-light;
+      }
+
+      &:active {
+        background-color: $color-primary-dark;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    &-next-btn {
+      background-color: #F4F9F4;
+      padding: 10px;
+      border-radius: 50px;
+      border: 1px solid $color-grey-light-2;
+      width: 30%;
+
+      &:hover {
+        background-color: $color-primary-light;
+      }
+
+      &:active {
+        background-color: $color-primary-dark;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
   }
 }

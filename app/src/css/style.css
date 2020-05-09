@@ -78,6 +78,62 @@
         color: #666;
         margin-left: 1rem;
         margin-right: 1.5rem; }
+    .lesson .console .error {
+      color: red; }
+  .lesson .result-message {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 1px solid #eee;
+    width: 500px;
+    height: 250px;
+    border-radius: 50px;
+    background-color: white;
+    display: none;
+    flex-direction: column; }
+    .lesson .result-message-text {
+      color: #35DF2D;
+      font-weight: bold;
+      font-size: 3em;
+      margin-top: 50px;
+      margin-bottom: 25px; }
+    .lesson .result-message-stats {
+      display: flex;
+      flex-direction: row; }
+    .lesson .result-message-duration {
+      width: 100%; }
+    .lesson .result-message-attempts {
+      width: 100%; }
+    .lesson .result-message-buttons {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around; }
+    .lesson .result-message-menu-btn {
+      background-color: #F4F9F4;
+      padding: 10px;
+      border-radius: 50px;
+      border: 1px solid #eee;
+      width: 30%; }
+      .lesson .result-message-menu-btn:hover {
+        background-color: #35DF2D; }
+      .lesson .result-message-menu-btn:active {
+        background-color: #1A8038; }
+      .lesson .result-message-menu-btn:focus {
+        outline: 0; }
+    .lesson .result-message-next-btn {
+      background-color: #F4F9F4;
+      padding: 10px;
+      border-radius: 50px;
+      border: 1px solid #eee;
+      width: 30%; }
+      .lesson .result-message-next-btn:hover {
+        background-color: #35DF2D; }
+      .lesson .result-message-next-btn:active {
+        background-color: #1A8038; }
+      .lesson .result-message-next-btn:focus {
+        outline: 0; }
 
 .pixi h2 {
   margin: 1rem; }
