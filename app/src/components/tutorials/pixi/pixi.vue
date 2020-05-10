@@ -5,8 +5,11 @@
       <h2>Tutorials</h2>
       <ul>
         <li v-for="category in categories">
-          <a href="#" @click="openCategory(category.id, $event)" >
+          <a href="#" @click="openCategory(category.id, $event)">
             {{ category.name }}
+            <div class="category-progress" :class="isCompleted(category)">
+              {{ getProgress(category) }}
+            </div>
           </a>
         </li>
       </ul>
@@ -100,6 +103,24 @@
         }).then((res) => {
           this.categoriesTaken = res;
         });
+      },
+      isCompleted(category) {
+        for (let taken of this.categoriesTaken) {
+          // If category is completed return class of
+          if (taken.categoryId === category.id && taken.difficulty === 5) {
+            return "completed";
+          }
+        }
+        return "";
+      },
+      getProgress(category) {
+        for (let taken of this.categoriesTaken) {
+          // If category is completed return class of
+          if (taken.categoryId === category.id) {
+            return "Level: " + taken.difficulty + " / 5";
+          }
+        }
+        return "Start";
       }
     },
     mounted(){

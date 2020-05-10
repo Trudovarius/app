@@ -1,0 +1,65 @@
+.completed-lessons {
+
+  h2 {
+    margin: 25px;
+  }
+
+  &-table {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 20px;
+
+    &-row {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 3em;
+      background-color: $color-grey-light-1;
+
+      &:nth-child(2n-1) {
+        background-color: $color-grey-light-2;
+      }
+
+      &:first-child, &:first-child a:hover, &:first-child a:active {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+
+      &:last-child, &:last-child a:hover, &:last-child a:active {
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+
+      &:hover {
+        background-color: $color-grey-dark;
+        color: white;
+      }
+    }
+
+    &-header {
+      font-weight: bold;
+    }
+
+    &-col, &-header {
+      width: 20%;
+    }
+  }
+
+  .stats {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    border-radius: 20px;
+    background-color: $color-grey-light-1;
+    padding: 3%;
+
+    &-name, &-value {
+      float: left;
+      display: block;
+      width: 46%;
+      margin: 2%;
+    }
+  }
+}

@@ -50,21 +50,45 @@
       }
 
       a {
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         background-color: inherit;
         color: black;
         font-weight: normal;
+        padding-left: 50px;
+        padding-right: 50px;
+
+        .completed {
+          background-color: $color-primary-light;
+        }
+
+        .category-progress {
+          border-radius: 50px;
+          padding: 5px;
+          width: 100px;
+          background-color: $color-primary-light;
+        }
       }
 
       a:hover, a:active  {
-        display: block;
         width: 100%;
         border-radius: 0px;
         background-color: $color-grey-dark;
         color: white;
         font-weight: normal;
+
+        .completed {
+          background-color: $color-primary-dark;
+        }
+
+        .category-progress {
+          background-color: $color-primary-dark;
+        }
       }
     }
   }
+
+
 }

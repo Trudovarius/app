@@ -10,6 +10,7 @@ import Profile from './components/user/profile.vue'
 import Dashboard from './components/dashboard.vue'
 import Pixi from './components/tutorials/pixi/pixi.vue'
 import Lesson from './components/tutorials/lesson.vue'
+import Completed from './components/tutorials/completed.vue'
 
 Vue.use(VueRouter);
 
@@ -20,7 +21,8 @@ const routes = [
   { path: '/profile', component: Profile },
   { path: '/dashboard', component: Dashboard },
   { path: '/pixi', component: Pixi },
-  { path: '/lesson/:lib/:id', component: Lesson }
+  { path: '/pixi/completed/:id', component: Completed },
+  { path: '/lesson/:lib/:id', component: Lesson },
 ];
 
 export default new VueRouter({mode: 'history', routes})

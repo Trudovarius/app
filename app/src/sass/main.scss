@@ -1,13 +1,15 @@
-@import "abstracts/mixins";
-@import "abstracts/variables";
+@import "./abstracts/mixins";
+@import "./abstracts/variables";
 
 @import "./layout";
 
-@import "./components/tutorials/lesson";
-@import "./components/tutorials/pixi/pixi";
 
 @import "./components/common";
 @import "./components/header";
 @import "./components/home";
 @import "./components/profile";
 @import "./components/dashboard";
+
+@import "./components/tutorials/completed";
+@import "./components/tutorials/lesson";
+@import "./components/tutorials/pixi/pixi";

@@ -37,7 +37,9 @@
         code: '',
         lesson: {},
         attempts: 0,
-        startTime: 0
+        startTime: 0,
+        consoleLog: console.log,
+        consoleError: console.error,
       }
     },
     computed: {
@@ -117,7 +119,7 @@
             }
           }
         }
-        // TODO category completed
+        this.$router.push("/"+this.$router.currentRoute.params.lib+"/completed/"+id);
       },
       /**
       * This functions iterates through array of completed lessons and returns true if it contains
@@ -184,7 +186,8 @@
       // redirect messages from console to html element
       setupConsole() {
         $(".console").empty();
-        var former = console.log;
+        this.consoleLog = console.log;
+        this.consoleError = console.error;
         console.log = (msg) => {
             // former(msg);  //maintains existing logging via the console.
             $(".console").append("<div class='line'>" + msg + "</div>");
@@ -214,19 +217,24 @@
       this.attemts = 0;  // init number of attempts
       this.startTime = Date.now(); // save time of start
       await this.setLesson(this.$router.currentRoute.params.id); // set lesson
-      var iframe = $('#canvas')[0].contentWindow;
-      iframe.addEventListener("load", () => { // init iframe
-          // set lesson in canvas
-          iframe.postMessage(
-            { type: "setup", lesson_id: this.lesson.id, category_id: this.$router.currentRoute.params.id },
-            location.origin
-          );
-      });
-      this.setupConsole();
+      var iframeEl = $('#canvas')[0];
+      if (iframeEl && iframeEl.contentWindow) {
+         var iframe = iframeEl.contentWindow;
+         iframe.addEventListener("load", () => { // init iframe
+             // set lesson in canvas
+             iframe.postMessage(
+               { type: "setup", lesson_id: this.lesson.id, category_id: this.$router.currentRoute.params.id },
+               location.origin
+             );
+         });
+         this.setupConsole();
+      }
     },
     beforeDestroy() {
       var messageEvent = window.addEventListener ? "message" : "onmessage";
       window.removeEventListener(messageEvent, this.onEvent);
+      console.log = this.consoleLog;
+      console.error = this.consoleError;
     }
   }
 </script>

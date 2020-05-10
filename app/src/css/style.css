@@ -22,166 +22,6 @@
   .row .col-2-of-4 {
     width: calc(2* ((100% - 3 * 2rem) / 4) + 2rem); }
 
-.lesson {
-  width: 100vw;
-  height: 90vh;
-  overflow: hidden; }
-  .lesson .task {
-    height: 20vh;
-    width: 100vw;
-    border-bottom: 1px solid #000; }
-    .lesson .task p {
-      margin: auto;
-      width: 100%;
-      height: 100%;
-      padding: 5px;
-      resize: none;
-      overflow-y: scroll;
-      overflow-x: hidden; }
-  .lesson .canvas {
-    width: 50vw;
-    height: 50vh;
-    float: left; }
-    .lesson .canvas #canvas {
-      width: 30vw;
-      height: 50vh;
-      background-color: blue; }
-  .lesson .code {
-    width: 50vw;
-    height: 50vh;
-    float: right; }
-    .lesson .code form {
-      width: 100%;
-      height: 90%; }
-      .lesson .code form textarea {
-        width: 100%;
-        height: 90%;
-        resize: none;
-        overflow-y: scroll;
-        overflow-x: hidden; }
-  .lesson .console {
-    height: 20vh;
-    width: 100vw;
-    float: left;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    border-top: 1px solid #000; }
-    .lesson .console .line {
-      color: black;
-      display: block;
-      width: 100vw;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-      padding: 3px; }
-      .lesson .console .line::before {
-        content: ">";
-        color: #666;
-        margin-left: 1rem;
-        margin-right: 1.5rem; }
-    .lesson .console .error {
-      color: red; }
-  .lesson .result-message {
-    position: absolute;
-    top: 200px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-bottom: 1px solid #eee;
-    width: 500px;
-    height: 250px;
-    border-radius: 50px;
-    background-color: white;
-    display: none;
-    flex-direction: column; }
-    .lesson .result-message-text {
-      color: #35DF2D;
-      font-weight: bold;
-      font-size: 3em;
-      margin-top: 50px;
-      margin-bottom: 25px; }
-    .lesson .result-message-stats {
-      display: flex;
-      flex-direction: row; }
-    .lesson .result-message-duration {
-      width: 100%; }
-    .lesson .result-message-attempts {
-      width: 100%; }
-    .lesson .result-message-buttons {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around; }
-    .lesson .result-message-menu-btn {
-      background-color: #F4F9F4;
-      padding: 10px;
-      border-radius: 50px;
-      border: 1px solid #eee;
-      width: 30%; }
-      .lesson .result-message-menu-btn:hover {
-        background-color: #35DF2D; }
-      .lesson .result-message-menu-btn:active {
-        background-color: #1A8038; }
-      .lesson .result-message-menu-btn:focus {
-        outline: 0; }
-    .lesson .result-message-next-btn {
-      background-color: #F4F9F4;
-      padding: 10px;
-      border-radius: 50px;
-      border: 1px solid #eee;
-      width: 30%; }
-      .lesson .result-message-next-btn:hover {
-        background-color: #35DF2D; }
-      .lesson .result-message-next-btn:active {
-        background-color: #1A8038; }
-      .lesson .result-message-next-btn:focus {
-        outline: 0; }
-
-.pixi h2 {
-  margin: 1rem; }
-
-.pixi .text {
-  padding: 3rem;
-  text-align: justify;
-  font-size: 1.1rem;
-  border-left: 1px solid #eee; }
-  .pixi .text p {
-    margin-top: 2rem;
-    margin-bottom: 1rem; }
-    .pixi .text p a {
-      display: block;
-      text-decoration: none; }
-    .pixi .text p a:hover, .pixi .text p a:active {
-      color: #1A8038;
-      text-decoration: underline; }
-
-.pixi ul {
-  width: 95%;
-  display: block; }
-  .pixi ul li {
-    display: block;
-    width: 100%;
-    background-color: #f7f7f7; }
-    .pixi ul li:nth-child(2n-1) {
-      background-color: #eee; }
-    .pixi ul li:first-child, .pixi ul li:first-child a:hover, .pixi ul li:first-child a:active {
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px; }
-    .pixi ul li:last-child, .pixi ul li:last-child a:hover, .pixi ul li:last-child a:active {
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px; }
-    .pixi ul li a {
-      display: block;
-      width: 100%;
-      background-color: inherit;
-      color: black;
-      font-weight: normal; }
-    .pixi ul li a:hover, .pixi ul li a:active {
-      display: block;
-      width: 100%;
-      border-radius: 0px;
-      background-color: #666;
-      color: white;
-      font-weight: normal; }
-
 * {
   margin: 0;
   padding: 0;
@@ -370,3 +210,220 @@ li a.router-link-active {
         background-color: #666;
         color: white;
         font-weight: normal; }
+
+.completed-lessons h2 {
+  margin: 25px; }
+
+.completed-lessons-table {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 20px; }
+  .completed-lessons-table-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3em;
+    background-color: #f7f7f7; }
+    .completed-lessons-table-row:nth-child(2n-1) {
+      background-color: #eee; }
+    .completed-lessons-table-row:first-child, .completed-lessons-table-row:first-child a:hover, .completed-lessons-table-row:first-child a:active {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px; }
+    .completed-lessons-table-row:last-child, .completed-lessons-table-row:last-child a:hover, .completed-lessons-table-row:last-child a:active {
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px; }
+    .completed-lessons-table-row:hover {
+      background-color: #666;
+      color: white; }
+  .completed-lessons-table-header {
+    font-weight: bold; }
+  .completed-lessons-table-col, .completed-lessons-table-header {
+    width: 20%; }
+
+.completed-lessons .stats {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  border-radius: 20px;
+  background-color: #f7f7f7;
+  padding: 3%; }
+  .completed-lessons .stats-name, .completed-lessons .stats-value {
+    float: left;
+    display: block;
+    width: 46%;
+    margin: 2%; }
+
+.lesson {
+  width: 100vw;
+  height: 90vh;
+  overflow: hidden; }
+  .lesson .task {
+    height: 20vh;
+    width: 100vw;
+    border-bottom: 1px solid #000; }
+    .lesson .task p {
+      margin: auto;
+      width: 100%;
+      height: 100%;
+      padding: 5px;
+      resize: none;
+      overflow-y: scroll;
+      overflow-x: hidden; }
+  .lesson .canvas {
+    width: 50vw;
+    height: 50vh;
+    float: left; }
+    .lesson .canvas #canvas {
+      width: 30vw;
+      height: 50vh; }
+  .lesson .code {
+    width: 50vw;
+    height: 50vh;
+    float: right; }
+    .lesson .code form {
+      width: 100%;
+      height: 90%; }
+      .lesson .code form textarea {
+        width: 100%;
+        height: 90%;
+        resize: none;
+        overflow-y: scroll;
+        overflow-x: hidden; }
+  .lesson .console {
+    height: 20vh;
+    width: 100vw;
+    float: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-top: 1px solid #000; }
+    .lesson .console .line {
+      color: black;
+      display: block;
+      width: 100vw;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      padding: 3px; }
+      .lesson .console .line::before {
+        content: ">";
+        color: #666;
+        margin-left: 1rem;
+        margin-right: 1.5rem; }
+    .lesson .console .error {
+      color: red; }
+  .lesson .result-message {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 1px solid #eee;
+    width: 500px;
+    height: 250px;
+    border-radius: 50px;
+    background-color: white;
+    display: none;
+    flex-direction: column; }
+    .lesson .result-message-text {
+      color: #35DF2D;
+      font-weight: bold;
+      font-size: 3em;
+      margin-top: 50px;
+      margin-bottom: 25px; }
+    .lesson .result-message-stats {
+      display: flex;
+      flex-direction: row; }
+    .lesson .result-message-duration {
+      width: 100%; }
+    .lesson .result-message-attempts {
+      width: 100%; }
+    .lesson .result-message-buttons {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around; }
+    .lesson .result-message-menu-btn {
+      background-color: #F4F9F4;
+      padding: 10px;
+      border-radius: 50px;
+      border: 1px solid #eee;
+      width: 30%; }
+      .lesson .result-message-menu-btn:hover {
+        background-color: #35DF2D; }
+      .lesson .result-message-menu-btn:active {
+        background-color: #1A8038; }
+      .lesson .result-message-menu-btn:focus {
+        outline: 0; }
+    .lesson .result-message-next-btn {
+      background-color: #F4F9F4;
+      padding: 10px;
+      border-radius: 50px;
+      border: 1px solid #eee;
+      width: 30%; }
+      .lesson .result-message-next-btn:hover {
+        background-color: #35DF2D; }
+      .lesson .result-message-next-btn:active {
+        background-color: #1A8038; }
+      .lesson .result-message-next-btn:focus {
+        outline: 0; }
+
+.pixi h2 {
+  margin: 1rem; }
+
+.pixi .text {
+  padding: 3rem;
+  text-align: justify;
+  font-size: 1.1rem;
+  border-left: 1px solid #eee; }
+  .pixi .text p {
+    margin-top: 2rem;
+    margin-bottom: 1rem; }
+    .pixi .text p a {
+      display: block;
+      text-decoration: none; }
+    .pixi .text p a:hover, .pixi .text p a:active {
+      color: #1A8038;
+      text-decoration: underline; }
+
+.pixi ul {
+  width: 95%;
+  display: block; }
+  .pixi ul li {
+    display: block;
+    width: 100%;
+    background-color: #f7f7f7; }
+    .pixi ul li:nth-child(2n-1) {
+      background-color: #eee; }
+    .pixi ul li:first-child, .pixi ul li:first-child a:hover, .pixi ul li:first-child a:active {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px; }
+    .pixi ul li:last-child, .pixi ul li:last-child a:hover, .pixi ul li:last-child a:active {
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px; }
+    .pixi ul li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background-color: inherit;
+      color: black;
+      font-weight: normal;
+      padding-left: 50px;
+      padding-right: 50px; }
+      .pixi ul li a .completed {
+        background-color: #35DF2D; }
+      .pixi ul li a .category-progress {
+        border-radius: 50px;
+        padding: 5px;
+        width: 100px;
+        background-color: #35DF2D; }
+    .pixi ul li a:hover, .pixi ul li a:active {
+      width: 100%;
+      border-radius: 0px;
+      background-color: #666;
+      color: white;
+      font-weight: normal; }
+      .pixi ul li a:hover .completed, .pixi ul li a:active .completed {
+        background-color: #1A8038; }
+      .pixi ul li a:hover .category-progress, .pixi ul li a:active .category-progress {
+        background-color: #1A8038; }
